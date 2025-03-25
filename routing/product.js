@@ -3,7 +3,7 @@ const fileSystem = require('fs')
 const { STATUS_CODE } = require('../constants/statusCode.js')
 
 const renderAddProductPage = (response) => {
-  response.setHeader(STATUS_CODE.FOUND, { 'Content-Type': 'text/html' })
+  response.setHeader('Content-Type', 'text/html')
   response.end(`
         <!DOCTYPE html>
         <html lang="en">
@@ -28,7 +28,7 @@ const renderNewProductPage = (response) => {
   fileSystem.readFile('product.txt', 'utf-8', (err, data) => {
     if (err || !data.trim()) {
       console.error('Error reading product file or file is empty:', err)
-      response.setHeader(STATUS_CODE.FOUND, { 'Content-Type': 'text/html' })
+      response.setHeader('Content-Type', 'text/html')
       return response.end(`
                 <!DOCTYPE html>
                 <html lang="en">
@@ -48,7 +48,7 @@ const renderNewProductPage = (response) => {
     const products = data.trim().split('\n')
     const newestProduct = products[products.length - 1]
 
-    response.setHeader(STATUS_CODE.FOUND, { 'Content-Type': 'text/html' })
+    response.setHeader('Content-Type', 'text/html')
     response.end(`
             <!DOCTYPE html>
             <html lang="en">
@@ -80,17 +80,17 @@ const addNewProduct = (request, response) => {
       fileSystem.appendFile('product.txt', productName + '\n', (err) => {
         if (err) {
           console.error('Error saving product:', err)
-          response.writeHead(STATUS_CODE.NOT_FOUND, {
+          response.setHeader(STATUS_CODE.NOT_FOUND, {
             'Content-Type': 'text/html',
           })
           return response.end('<h1>500 Internal Server Error</h1>')
         }
         console.log(`New product added: ${productName}`)
-        response.writeHead(STATUS_CODE.FOUND, { Location: '/product/new' })
+        response.setHeader(STATUS_CODE.FOUND, { Location: '/product/new' })
         response.end()
       })
     } else {
-      response.writeHead(STATUS_CODE.NOT_FOUND, { 'Content-Type': 'text/html' })
+      response.setHeader('Content-Type', 'text/html')
       response.end('<h1>400 Bad Request</h1>')
     }
   })
@@ -107,7 +107,7 @@ const productRouting = (request, response) => {
     return renderNewProductPage(response)
   } else {
     console.log(`ERROR: requested url ${url} doesn’t exist.`)
-    response.writeHead(STATUS_CODE.NOT_FOUND, { 'Content-Type': 'text/html' })
+    response.setHeader('Content-Type', 'text/html')
     response.end('<h1>404 Not Found</h1>')
   }
 }

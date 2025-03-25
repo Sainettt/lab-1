@@ -25,7 +25,7 @@ const requestRouting = (request, response) => {
     process.exit()
   } else {
     console.log(`ERROR [${date}]: requested url ${url} doesn’t exist.`)
-    response.writeHead(STATUS_CODE.NOT_FOUND, { 'Content-Type': 'text/html' })
+    response.setHeader('Content-Type', 'text/html')
     response.end('<h1>404 Not Found</h1>')
   }
 }

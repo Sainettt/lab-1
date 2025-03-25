@@ -1,6 +1,6 @@
 // 🏗 Stwórz funkcję 'homeRouting', która obsłuży stronę główną.
 const homeRouting = (request, response) => {
-  response.setHeader(200, { 'Content-Type': 'text/html' })
+  response.setHeader('Content-Type', 'text/html')
 
   const htmlContent = `
         <!DOCTYPE html>
