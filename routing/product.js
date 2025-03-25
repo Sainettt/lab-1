@@ -80,9 +80,7 @@ const addNewProduct = (request, response) => {
       fileSystem.appendFile('product.txt', productName + '\n', (err) => {
         if (err) {
           console.error('Error saving product:', err)
-          response.setHeader(STATUS_CODE.NOT_FOUND, {
-            'Content-Type': 'text/html',
-          })
+          response.setHeader('Content-Type', 'text/html')
           return response.end('<h1>500 Internal Server Error</h1>')
         }
         console.log(`New product added: ${productName}`)
