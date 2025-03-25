@@ -84,7 +84,7 @@ const addNewProduct = (request, response) => {
           return response.end('<h1>500 Internal Server Error</h1>')
         }
         console.log(`New product added: ${productName}`)
-        response.setHeader(STATUS_CODE.FOUND, { Location: '/product/new' })
+        response.setHeader('Content-Type', '/product/new')
         response.end()
       })
     } else {
