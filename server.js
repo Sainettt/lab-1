@@ -1,4 +1,4 @@
-// 📦 Musisz zaimportować tutaj moduł 'http'.
+const http = require('http')
 // 📦 Żeby użyć tutaj PORT, musisz zaimportować go z modułu konfiguracyjnego z pliku 'config.js'.
 // 📦 Zaimportuj funkcję 'requestRouting' z modułu 'routing/routing.js'.
 
